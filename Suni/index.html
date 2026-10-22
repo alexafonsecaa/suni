@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Suni</title>
+<meta name="theme-color" content="#F9DEA6">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css?v=3">
+<link rel="stylesheet" href="css/components.css?v=6">
+<link rel="stylesheet" href="css/screens.css?v=2">
+<link rel="stylesheet" href="css/mobile.css?v=10">
+</head>
+<body>
+
+<main class="stage">
+  <div class="device" id="device" role="application" aria-label="Prototipo Suni">
+
+    <!-- ============ 1 · SPLASH (331:7579) ============ -->
+    <section class="screen screen--splash is-current" data-screen="splash" aria-label="Suni">
+      <button class="back back--fwd" style="left:355px; top:66px" data-action="splash:back" aria-label="Volver">
+        <img src="assets/back-chevron.png" alt="">
+
+      </button>
+
+      <button class="btn" style="left:110px; top:143px; width:200px; height:50px" data-action="splash:sesion">Inicia Sesión</button>
+      <p class="splash__or">O</p>
+      <button class="btn" style="left:110px; top:222px; width:200px; height:50px" data-action="splash:registro">Regístrate</button>
+
+      <p class="splash__slogan">Menos pantalla, más vida.</p>
+      <img class="splash__suni" src="assets/suni-splash.png" alt="Suni">
+    </section>
+
+    <!-- ============ 2 · LOGIN (377:429) ============ -->
+    <section class="screen screen--login" data-screen="login" aria-label="Iniciar sesión">
+      <img class="brand" src="assets/cara-sonrisa.png" alt="Suni">
+
+      <button class="back back--fwd" style="left:358px; top:66px" data-action="login:back" aria-label="Volver">
+        <img src="assets/back-chevron.png" alt="">
+
+      </button>
+
+      <div class="field" style="left:90px; top:498px">
+        <span class="field__label">Correo o usuario</span>
+        <div class="field__box" tabindex="0"></div>
+      </div>
+
+      <div class="field" style="left:90px; top:593px">
+        <span class="field__label">Contraseña</span>
+        <div class="field__box" tabindex="0"></div>
+      </div>
+
+      <button class="btn" style="left:110px; top:707px; width:200px; height:50px" data-action="login:home">Ingresar</button>
+    </section>
+
+    <!-- ============ 3 · CREAR CUENTA (95:3388 · frame 420×1258) ============ -->
+    <section class="screen screen--registro" data-screen="registro" aria-label="Crear cuenta">
+      <div class="scroll">
+        <div class="sheet">
+          <img class="brand" src="assets/cara-sonrisa.png" alt="Suni">
+
+          <button class="back back--fwd" style="left:354px; top:66px" data-action="registro:back" aria-label="Volver">
+            <img src="assets/back-chevron.png" alt="">
+    
+          </button>
+
+          <h1 class="registro__title">Crear cuenta</h1>
+
+          <div class="field" style="left:90px; top:549px">
+            <span class="field__label">Nombre</span>
+            <div class="field__box" tabindex="0"></div>
+          </div>
+          <div class="field" style="left:90px; top:652px">
+            <span class="field__label">Apellido</span>
+            <div class="field__box" tabindex="0"></div>
+          </div>
+          <div class="field" style="left:90px; top:755px">
+            <span class="field__label">Nombre de usuario</span>
+            <div class="field__box" tabindex="0"></div>
+          </div>
+          <div class="field" style="left:90px; top:858px">
+            <span class="field__label">Correo</span>
+            <div class="field__box" tabindex="0"></div>
+          </div>
+          <div class="field" style="left:90px; top:961px">
+            <span class="field__label">Contraseña</span>
+            <div class="field__box" tabindex="0"></div>
+          </div>
+          <div class="field" style="left:90px; top:1064px">
+            <span class="field__label">Confirmar contraseña</span>
+            <div class="field__box" tabindex="0"></div>
+          </div>
+
+          <button class="btn" style="left:110.5px; top:1167px; width:200px; height:50px" data-action="registro:login">Registrarse</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4 · HOME (95:3394) ============ -->
+    <section class="screen screen--home" data-screen="home" aria-label="Inicio">
+      <h1 class="home__greeting">¡Buenos días, <b>Isabel</b>!</h1>
+
+      <div class="suni" id="suni" data-state="default">
+        <img class="suni__img suni__img--default" data-state-img="default" src="assets/card-default.png" alt="Suni pregunta: ¿cómo dormiste?">
+        <img class="suni__img" data-state-img="triste" src="assets/card-triste.png" alt="Propósitos del día con ánimo triste" hidden>
+        <img class="suni__img" data-state-img="normal" src="assets/card-normal.png" alt="Propósitos del día con ánimo neutral" hidden>
+        <img class="suni__img" data-state-img="feliz" src="assets/card-feliz.png" alt="Propósitos del día con ánimo alegre" hidden>
+        <img class="suni__img" data-state-img="done-triste" src="assets/done-triste.png" alt="Tus propósitos de hoy" hidden>
+        <img class="suni__img" data-state-img="done-normal" src="assets/done-normal.png" alt="Tus propósitos de hoy" hidden>
+        <img class="suni__img" data-state-img="done-feliz" src="assets/done-feliz.png" alt="Tus propósitos de hoy" hidden>
+        <!-- Variantes 247:5724 · 252:5763 · 252:5780: "Tus propósitos" con el
+             aviso "Cambios guardados" — estado inmediato tras pulsar Guardar -->
+        <img class="suni__img" data-state-img="saved-triste" src="assets/saved-triste.png" alt="Cambios guardados con ánimo triste" hidden>
+        <img class="suni__img" data-state-img="saved-normal" src="assets/saved-normal.png" alt="Cambios guardados con ánimo neutral" hidden>
+        <img class="suni__img" data-state-img="saved-feliz" src="assets/saved-feliz.png" alt="Cambios guardados con ánimo alegre" hidden>
+
+        <button class="face face--triste" data-face="triste" aria-label="Respondí triste">
+          <img class="face__base" src="assets/face-triste.png" alt="">
+          <img class="face__hover" src="assets/face-triste-hover.png" alt="">
+        </button>
+        <button class="face face--normal" data-face="normal" aria-label="Respondí neutral">
+          <img class="face__base" src="assets/face-normal.png" alt="">
+          <img class="face__hover" src="assets/face-normal-hover.png" alt="">
+        </button>
+        <button class="face face--feliz" data-face="feliz" aria-label="Respondí feliz">
+          <img class="face__base" src="assets/face-feliz.png" alt="">
+          <img class="face__hover" src="assets/face-feliz-hover.png" alt="">
+        </button>
+
+        <button class="goal-input" data-goal-input style="left:174px; top:297px" aria-label="Propósito 1"></button>
+        <button class="goal-input" data-goal-input style="left:174px; top:337px" aria-label="Propósito 2"></button>
+        <button class="goal-input" data-goal-input style="left:174px; top:377px" aria-label="Propósito 3"></button>
+
+        <button class="goal-save" data-goal-save style="left:295px; top:411px">Guardar</button>
+        <button class="goal-edit" data-goal-edit style="left:339px; top:315px">Editar</button>
+      </div>
+
+      <section class="card" aria-label="Tus alarmas">
+        <h2 class="card__title">Tus alarmas</h2>
+        <p class="card__date">Martes, 20 de octubre</p>
+
+        <div class="grid" id="grid">
+          <button class="cell" data-day="Lun" aria-label="Lunes">
+            <img class="cell__sun" src="assets/icon-sol-grid.png" alt="">
+            <span class="cell__time">8:00</span>
+            <span class="cell__day">Lun</span>
+            <span class="cell__time">11:00</span>
+            <img class="cell__moon" src="assets/icon-luna-grid.png" alt="">
+          </button>
+          <button class="cell is-selected" data-day="Mar" aria-label="Martes" aria-pressed="true">
+            <img class="cell__sun" src="assets/icon-sol-grid.png" alt="">
+            <span class="cell__time">8:00</span>
+            <span class="cell__day">Mar</span>
+            <span class="cell__time">11:00</span>
+            <img class="cell__moon" src="assets/icon-luna-grid.png" alt="">
+          </button>
+          <button class="cell" data-day="Mie" aria-label="Miércoles">
+            <img class="cell__sun" src="assets/icon-sol-grid.png" alt="">
+            <span class="cell__time">8:00</span>
+            <span class="cell__day">Mie</span>
+            <span class="cell__time">11:00</span>
+            <img class="cell__moon" src="assets/icon-luna-grid.png" alt="">
+          </button>
+          <button class="cell" data-day="Jue" aria-label="Jueves">
+            <img class="cell__sun" src="assets/icon-sol-grid.png" alt="">
+            <span class="cell__time">8:00</span>
+            <span class="cell__day">Jue</span>
+            <span class="cell__time">11:00</span>
+            <img class="cell__moon" src="assets/icon-luna-grid.png" alt="">
+          </button>
+          <button class="cell" data-day="Vie" aria-label="Viernes">
+            <img class="cell__sun" src="assets/icon-sol-grid.png" alt="">
+            <span class="cell__time">8:00</span>
+            <span class="cell__day">Vie</span>
+            <span class="cell__time">11:00</span>
+            <img class="cell__moon" src="assets/icon-luna-grid.png" alt="">
+          </button>
+          <button class="cell" data-day="Sab" aria-label="Sábado">
+            <img class="cell__sun" src="assets/icon-sol-grid.png" alt="">
+            <span class="cell__time">8:00</span>
+            <span class="cell__day">Sab</span>
+            <span class="cell__time">11:00</span>
+            <img class="cell__moon" src="assets/icon-luna-grid.png" alt="">
+          </button>
+          <button class="cell" data-day="Dom" aria-label="Domingo">
+            <img class="cell__sun" src="assets/icon-sol-grid.png" alt="">
+            <span class="cell__time">8:00</span>
+            <span class="cell__day">Dom</span>
+            <span class="cell__time">11:00</span>
+            <img class="cell__moon" src="assets/icon-luna-grid.png" alt="">
+          </button>
+        </div>
+      </section>
+
+      <nav class="home__nav" aria-label="Navegación principal">
+        <button class="navbtn navbtn--buddi" data-action="home:buddi" aria-label="Configura tu Buddi">
+          <img class="navbtn__base" src="assets/nav-buddi.png" alt="">
+          <img class="navbtn__hover" src="assets/nav-buddi-hover.png" alt="">
+        </button>
+        <button class="navbtn navbtn--habitos" data-action="home:habitos" aria-label="Mis hábitos">
+          <img class="navbtn__base" src="assets/nav-rutina.png" alt="">
+          <img class="navbtn__hover" src="assets/nav-rutina-hover.png" alt="">
+        </button>
+        <button class="navbtn navbtn--perfil" data-action="home:perfil" aria-label="Mi cuenta">
+          <img class="navbtn__base" src="assets/nav-usuario.png" alt="">
+          <img class="navbtn__hover" src="assets/nav-usuario-hover.png" alt="">
+        </button>
+      </nav>
+    </section>
+
+    <!-- ============ 5 · MIS HÁBITOS (95:3431) ============ -->
+    <section class="screen screen--habitos screen--plain" data-screen="habitos" aria-label="Mis hábitos">
+      <img class="cloud cloud--1" src="assets/cloud.png" alt="">
+      <img class="cloud cloud--2" src="assets/cloud.png" alt="">
+      <img class="cloud cloud--3" src="assets/cloud.png" alt="">
+      <img class="cloud cloud--4" src="assets/cloud.png" alt="">
+
+      <img class="habitos__pillow" src="assets/pillow.png" alt="">
+      <div class="habitos__panel"></div>
+
+      <button class="back" style="left:40px; top:71px" data-action="back:home" aria-label="Volver">
+        <img src="assets/back-chevron.png" alt="">
+
+      </button>
+      <h1 class="screen__title" style="left:145px; top:81px">Mis hábitos</h1>
+
+      <h2 class="habitos__subtitle">Define tu horario de sueño</h2>
+
+      <div class="habits__list">
+        <div class="row" data-day="1" tabindex="0" style="width:337.3px">
+          <span class="row__day">Lunes</span>
+          <span class="row__icon row__icon--am"><img src="assets/icon-sol.png" alt="Mañana"><i>am</i></span>
+          <span class="row__time"><span class="chip">08</span><b>:</b><span class="chip">00</span></span>
+          <span class="row__icon row__icon--pm"><img src="assets/icon-luna.png" alt="Noche"><i>pm</i></span>
+          <span class="row__time"><span class="chip">11</span><b>:</b><span class="chip">00</span></span>
+        </div>
+        <div class="row" data-day="2" tabindex="0" style="width:348.3px">
+          <span class="row__day">Martes</span>
+          <span class="row__icon row__icon--am"><img src="assets/icon-sol.png" alt="Mañana"><i>am</i></span>
+          <span class="row__time"><span class="chip">08</span><b>:</b><span class="chip">00</span></span>
+          <span class="row__icon row__icon--pm"><img src="assets/icon-luna.png" alt="Noche"><i>pm</i></span>
+          <span class="row__time"><span class="chip">11</span><b>:</b><span class="chip">00</span></span>
+        </div>
+        <div class="row" data-day="3" tabindex="0" style="width:353px">
+          <span class="row__day">Miércoles</span>
+          <span class="row__icon row__icon--am"><img src="assets/icon-sol.png" alt="Mañana"><i>am</i></span>
+          <span class="row__time"><span class="chip">08</span><b>:</b><span class="chip">00</span></span>
+          <span class="row__icon row__icon--pm"><img src="assets/icon-luna.png" alt="Noche"><i>pm</i></span>
+          <span class="row__time"><span class="chip">11</span><b>:</b><span class="chip">00</span></span>
+        </div>
+        <div class="row" data-day="4" tabindex="0" style="width:348.3px">
+          <span class="row__day">Jueves</span>
+          <span class="row__icon row__icon--am"><img src="assets/icon-sol.png" alt="Mañana"><i>am</i></span>
+          <span class="row__time"><span class="chip">08</span><b>:</b><span class="chip">00</span></span>
+          <span class="row__icon row__icon--pm"><img src="assets/icon-luna.png" alt="Noche"><i>pm</i></span>
+          <span class="row__time"><span class="chip">11</span><b>:</b><span class="chip">00</span></span>
+        </div>
+        <div class="row" data-day="5" tabindex="0" style="width:353px">
+          <span class="row__day">Viernes</span>
+          <span class="row__icon row__icon--am"><img src="assets/icon-sol.png" alt="Mañana"><i>am</i></span>
+          <span class="row__time"><span class="chip">08</span><b>:</b><span class="chip">00</span></span>
+          <span class="row__icon row__icon--pm"><img src="assets/icon-luna.png" alt="Noche"><i>pm</i></span>
+          <span class="row__time"><span class="chip">11</span><b>:</b><span class="chip">00</span></span>
+        </div>
+        <div class="row" data-day="6" tabindex="0" style="width:352.3px">
+          <span class="row__day">Sábado</span>
+          <span class="row__icon row__icon--am"><img src="assets/icon-sol.png" alt="Mañana"><i>am</i></span>
+          <span class="row__time"><span class="chip">08</span><b>:</b><span class="chip">00</span></span>
+          <span class="row__icon row__icon--pm"><img src="assets/icon-luna.png" alt="Noche"><i>pm</i></span>
+          <span class="row__time"><span class="chip">11</span><b>:</b><span class="chip">00</span></span>
+        </div>
+        <div class="row" data-day="7" tabindex="0" style="width:353px">
+          <span class="row__day">Domingo</span>
+          <span class="row__icon row__icon--am"><img src="assets/icon-sol.png" alt="Mañana"><i>am</i></span>
+          <span class="row__time"><span class="chip">08</span><b>:</b><span class="chip">00</span></span>
+          <span class="row__icon row__icon--pm"><img src="assets/icon-luna.png" alt="Noche"><i>pm</i></span>
+          <span class="row__time"><span class="chip">11</span><b>:</b><span class="chip">00</span></span>
+        </div>
+      </div>
+
+      <button class="btn" style="left:109.5px; top:1054px; width:200px; height:50px" data-action="habitos:save">Guardar</button>
+      <p class="routine-status" id="routine-status" role="status">Horario local; pendiente de sincronizar con Buddi.</p>
+      <div class="notification-dialog" id="notification-dialog" role="dialog" aria-modal="true" aria-labelledby="notification-title" hidden>
+        <p id="notification-title">Te informaremos cuando se acerque tu hora de dormir</p>
+        <p class="notification-question"><img src="assets/notification-bell.png" alt="">¿Permites el envío de notificaciones?</p>
+        <button class="btn" id="notification-accept">Aceptar</button>
+      </div>
+      <button class="notification-settings" id="notification-settings" type="button" hidden>Notificaciones: sin activar</button>
+    </section>
+
+    <!-- ============ 6 · CONFIGURA TU BUDDI (95:3435) ============ -->
+    <section class="screen screen--buddi screen--plain" data-screen="buddi" aria-label="Configura tu Buddi">
+      <!-- En Figma el Botón "Guardar" (95:3447) va DEBAJO de los paneles en el
+           orden de apilado: queda cubierto por el panel 21 y no se ve (así
+           aparece en el render del diseño). Se conserva en el marcado.       -->
+      <button class="btn" style="left:110px; top:792px; width:200px; height:50px" data-action="buddi:save">Guardar</button>
+
+      <div class="buddi__panel buddi__panel--1"></div>
+      <div class="buddi__panel buddi__panel--2"></div>
+      <div class="buddi__panel buddi__panel--3"></div>
+
+      <button class="back" style="left:40px; top:71px" data-action="back:home" aria-label="Volver">
+        <img src="assets/back-chevron.png" alt="">
+
+      </button>
+      <h1 class="screen__title" style="left:118px; top:82px">Configura tu Buddi</h1>
+
+      <h2 class="buddi__section" style="left:47px; top:192.5px">Conexión Bluetooth</h2>
+      <button class="bluetooth" id="bluetooth" aria-label="Estado de conexión Bluetooth" aria-pressed="false">
+        <img src="assets/bt-face.png" alt="">
+      </button>
+
+      <h2 class="buddi__section" style="left:42px; top:321px">Volumen De Alarma</h2>
+      <div class="bar" id="bar" role="slider" aria-label="Volumen de alarma"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" tabindex="0">
+        <img class="bar__logo" src="assets/sound-logo.png" alt="">
+      </div>
+      <output class="volume-status" id="volume-status" for="bar" aria-live="polite">100 % · pendiente de sincronizar</output>
+
+      <h2 class="buddi__section" style="left:43px; top:483px">Elige tu sonido</h2>
+      <button class="btn btn--sound" style="left:35px; top:529px; width:350px; height:40px" data-sound="clasico">Clásico</button>
+      <button class="btn btn--sound" style="left:35px; top:579px; width:350px; height:40px" data-sound="pajaro">Canto de pájaro</button>
+      <button class="btn btn--sound" style="left:35px; top:629px; width:350px; height:40px" data-sound="rio">Río tranquilizante</button>
+      <button class="btn btn--sound" style="left:35px; top:679px; width:350px; height:40px" data-sound="digital">Alarma digital</button>
+    </section>
+
+    <!-- ============ 7 · MI CUENTA Y PERFIL (406:7770) ============ -->
+    <section class="screen screen--perfil" data-screen="perfil" aria-label="Mi cuenta y perfil">
+      <img class="perfil__decor pd-v1" src="assets/perfil-v1.png" alt="">
+      <button class="perfil__save" data-action="perfil:home" aria-label="Guardar cambios">
+        <img class="perfil__decor pd-v4" src="assets/perfil-v4.png" alt="">
+        <span>Guardar</span>
+      </button>
+      <img class="perfil__decor pd-v3" src="assets/perfil-v3.png" alt="">
+      <img class="perfil__decor pd-v2" src="assets/perfil-v2.png" alt="">
+      <div class="perfil__decor pd-e4"></div>
+      <img class="perfil__face" src="assets/perfil-face.png" alt="Suni">
+      <div class="perfil__decor pd-div"></div>
+
+      <h1 class="screen__title" style="left:116px; top:82px">Mi Cuenta y Perfil</h1>
+      <p class="perfil__name">Isabel</p>
+      <button class="perfil__edit" data-action="perfil:editar">Editar</button>
+
+      <span class="perfil__label" style="left:45px; top:389px">Nombre Completo</span>
+      <button class="p-input" style="left:43px; top:422px">Isabel Fonseca</button>
+
+      <span class="perfil__label" style="left:44px; top:476px">Correo Electrónico</span>
+      <button class="p-input" style="left:42px; top:509px">Isabel Fonseca</button>
+
+      <span class="perfil__label" style="left:42px; top:561px">Usuario</span>
+      <button class="p-input" style="left:40px; top:594px">@isa.duerme.de.lado</button>
+
+      <span class="perfil__label" style="left:42px; top:648px">Contraseña</span>
+      <button class="p-input" style="left:40px; top:681px">********</button>
+
+      <img class="perfil__decor pd-png02" src="assets/perfil-png02.png" alt="">
+      <img class="perfil__decor pd-v5" src="assets/perfil-v5.png" alt="">
+      <img class="perfil__decor pd-v6" src="assets/perfil-v6.png" alt="">
+      <img class="perfil__decor pd-v7" src="assets/perfil-v7.png" alt="">
+
+      <button class="back" style="left:40px; top:71px" data-action="back:home" aria-label="Volver">
+        <img src="assets/back-chevron.png" alt="">
+
+      </button>
+    </section>
+
+  </div>
+</main>
+
+<!-- Avisos accesibles del enlace con el dispositivo (sin cambios visuales) -->
+<div id="ble-status" class="status" role="status" aria-live="polite">Buddi desconectado</div>
+
+<script src="js/interactions.js?v=2"></script>
+<script src="js/schedule.js"></script>
+<script src="js/ble.js?v=1"></script>
+<script src="js/app.js?v=6"></script>
+<script src="js/functional.js?v=6"></script>
+<script src="js/notifications.js?v=9"></script>
+</body>
+</html>

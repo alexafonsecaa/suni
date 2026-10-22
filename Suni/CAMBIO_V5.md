@@ -1,0 +1,1 @@
+Suni v5: solo se eliminan los textos predeterminados de los tres propósitos. Los campos nuevos aparecen vacíos; se mantienen los propósitos guardados del día en el mismo perfil local. Al registrar un perfil nuevo se eliminan los propósitos de la cuenta local anterior. Sin cambios visuales ni en el firmware.
