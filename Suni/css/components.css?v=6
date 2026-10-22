@@ -1,0 +1,641 @@
+/* =========================================================================
+   Suni · components.css
+   Réplica de los componentes de las páginas "Componentes" y "Frames Suni"
+   del archivo Figma (estado 2026-10-21). Cada regla indica el id original.
+   ========================================================================= */
+
+/* --- Botón (18:1176 · hover 47:3059 · pressed 47:3063) -------------------- */
+/* 200×50 (o 339×40) · radio 20 · relleno rgba(142,159,163,.20)              */
+/* texto Roboto 400 20/23.44                                                  */
+.btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 40px;
+  border: 0;
+  border-radius: 20px;
+  background: var(--glass);
+  box-shadow: var(--rim-glass), var(--sh-btn);
+  color: var(--c-olive);
+  font: 400 20px/23.4375px "Roboto", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  /* CHANGE_TO a variante hover/pressed: transition heredada del set =
+     SMART_ANIMATE 300ms EASE_OUT (transitionDuration=300 en 18:1176)      */
+  transition: background-color 300ms var(--ease-out), transform 300ms var(--ease-out);
+}
+.btn:hover { background: var(--glass-hover); }
+.btn:active { transform: scale(.985); background: var(--glass-press); }
+.btn:focus-visible { outline: 2px solid rgba(255, 251, 226, .8); outline-offset: 2px; }
+
+/* Texto de Botón con otro color (chips de sonido 291:7484…) */
+/* Los chips suman el tinte del efecto GLASS de Figma: todo el relleno cae un */
+/* 13% (medido #707653 = mi compuesto×.87) y el filo claro (167,175,137) da   */
+/* paso justo debajo a una banda oscura de ~4px (#6A714E)                     */
+.btn--sound {
+  color: var(--c-sound);
+  background: linear-gradient(rgba(0, 0, 0, .13), rgba(0, 0, 0, .13)), var(--glass);
+  box-shadow: var(--rim-glass), var(--sh-btn), inset 0 4px 6px -3px rgba(0, 0, 0, .10);
+}
+.btn--sound:hover {
+  background: linear-gradient(rgba(0, 0, 0, .13), rgba(0, 0, 0, .13)), var(--glass-hover);
+}
+/* Sonido elegido en "Elige tu sonido": queda marcado (el envío real es
+   SETSOUND=<slug> por BLE; el estado persiste en localStorage).        */
+.btn--sound.is-selected {
+  background: linear-gradient(rgba(0, 0, 0, .13), rgba(0, 0, 0, .13)), var(--glass-hover);
+  box-shadow: var(--rim-glass), var(--sh-btn), inset 0 4px 6px -3px rgba(0, 0, 0, .10),
+              inset 0 0 0 1.5px rgba(255, 251, 226, .55);
+}
+.btn--ink   { color: var(--c-ink); }
+
+/* --- Cuadro de texto (497:1187 · focused 497:1222) ------------------------ */
+/* Defecto 240×40 radio 20, relleno doble translúcido + brillo interior;      */
+/* al foco el primer relleno sube de .20 a .30 y aparece el cursor (Vector 16)*/
+.field { position: absolute; width: 240px; }
+
+.field__label {
+  display: block;
+  height: 23px;
+  font: 500 20px/23.4375px "Roboto", sans-serif;
+  color: var(--c-title);
+}
+
+.field__box {
+  position: relative;
+  margin-top: 4px;
+  width: 240px;
+  height: 40px;
+  border-radius: 20px;
+  background: var(--field);
+  box-shadow: var(--sh-inset-cream);
+  cursor: text;
+  /* CHANGE_TO a variante enfocada (497:1188): el set hereda
+     500ms EASE_IN_AND_OUT (transitionDuration=500/EASE_IN_AND_OUT) */
+  transition: background 500ms var(--ease-inout);
+}
+/* Variante enfocada (497:1188): solo sube el primer relleno a .30 —
+   el cursor (Vector 16) solo existe en la variante 497:1222, que es la
+   que se usa dentro de la tarjeta de propósitos, no en login/registro. */
+.field.is-focused .field__box { background: var(--field-focus); }
+
+/* Cursor de texto de los propósitos: Figma lo anima ciclando entre las
+   variantes 497:1188 (sin cursor) ⇄ 497:1222 (con cursor), cada salto con
+   CHANGE_TO heredado de 500ms EASE_IN_AND_OUT y una espera AFTER_TIMEOUT
+   (500 ms por defecto) ⇒ ciclo de 2 s con fundidos de medio segundo.    */
+@keyframes caret-blink {
+  0%   { opacity: 0; animation-timing-function: ease-in-out; }
+  25%  { opacity: 1; animation-timing-function: ease-in-out; }
+  50%  { opacity: 1; animation-timing-function: ease-in-out; }
+  75%  { opacity: 0; animation-timing-function: ease-in-out; }
+  100% { opacity: 0; }
+}
+
+/* --- Flecha de regreso (36:2071 · hover 47:3188 · pressed 47:3192) -------- */
+/* Instancia 46×46 = Ellipse 116 (45×45, glass rgba(142,159,163,.20) → .50
+   en hover/press) + chevron "Flecha regreso" (14×25, #636225) en rel(12,11).
+   back-chevron.png mide 154/3 = 51.33 px (export 3× con margen): se sitúa
+   en -3.33 para que el círculo exportado caiga en (0,0) del botón.        */
+.back {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.back::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(142, 159, 163, .20);
+  box-shadow: var(--rim-glass);
+  /* Hover/pressed = CHANGE_TO 47:3188/47:3192 con la transición
+     heredada del set: 300ms EASE_OUT (transitionDuration=300) */
+  transition: background 300ms var(--ease-out);
+}
+.back:hover::before  { background: rgba(142, 159, 163, .50); }
+.back:active::before { background: rgba(142, 159, 163, .50); filter: brightness(.92); }
+.back img {
+  position: absolute;
+  left: -3.33px;
+  top: -3.33px;
+  width: 51.33px;
+  height: 51.33px;
+}
+/* Flechas del flujo inicial (splash · login · registro): en Figma la
+   instancia "Flecha regreso" viene espejada horizontalmente ⇒ chevron ">"
+   con el mismo PNG (el círculo es simétrico)                             */
+.back--fwd img { transform: scaleX(-1); }
+
+/* --- Botones de navegación (47:3058 · hover 47:3250/3259/3296) ------------ */
+/* 65×65 · la imagen exportada mide 71×71 (incluye sombra 0 0 3)             */
+.navbtn {
+  position: absolute;
+  top: 797px;
+  width: 65px;
+  height: 65px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  /* ON_PRESS → CHANGE_TO variante (95:3395/3396: 300ms EASE_OUT) */
+  transition: transform 300ms var(--ease-out);
+}
+.navbtn img {
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  width: 71px;
+  height: 71px;
+  /* Cruce de imagen del hover: mismo CHANGE_TO de 300ms EASE_OUT */
+  transition: opacity 300ms var(--ease-out);
+}
+.navbtn__hover { opacity: 0; }
+.navbtn:hover .navbtn__hover { opacity: 1; }
+.navbtn:hover .navbtn__base  { opacity: 0; }
+.navbtn:active { transform: scale(.94); }
+.navbtn:active .navbtn__hover { opacity: 1; filter: brightness(.94); }
+
+.navbtn--buddi   { left: 62px; }
+.navbtn--habitos { left: 177px; }
+.navbtn--perfil  { left: 292px; }
+
+/* --- Caras de respuesta --------------------------------------------------- */
+/* Defecto 60×56 · hover 69×65 centrado sobre el mismo rectángulo            */
+/* (hover de variante 47:2916 · 47:2901 · 39:2856)                           */
+.face {
+  position: absolute;
+  top: 209px;
+  width: 60px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.face img { position: absolute; transition: opacity 200ms ease; }
+.face__base  { left: 0; top: 0; width: 60px; height: 56px; }
+.face__hover { left: -4.5px; top: -4.5px; width: 69px; height: 65px; opacity: 0; }
+
+.face--triste { left: 154px; }
+.face--normal { left: 233px; width: 61px; }
+.face--feliz  { left: 313px; }
+
+.face--normal .face__base  { width: 61px; }
+.face--normal .face__hover { left: -4px; width: 69px; }
+
+.face:hover .face__hover { opacity: 1; }
+.face:hover .face__base  { opacity: 0; }
+.face:active { transform: scale(.94); }
+
+/* --- Bloque Suni (Suni pregunta 39:2836) ---------------------------------- */
+/* Estados exportados de las variantes del set:                              */
+/*   default 39:2837 · propósitos 242:5707/606:3656/606:3678                  */
+/*   "Tus propósitos" 606:3753/3735/3717                                     */
+/* La instancia en Home (181:5158) mide 361×306 en (29,150).                 */
+.suni { position: absolute; left: 0; top: 0; width: 420px; height: 470px; }
+
+.suni__img {
+  position: absolute;
+  left: 29px;
+  top: 150px;
+  width: 361px;
+  height: 306px;
+  transition: opacity var(--t-smart) var(--ease-out);
+}
+/* Los 10 sprites del set exportan a 1083×918 (361×306 a 3×): todos iguales */
+.suni__img[hidden]  { display: none; }
+
+/* Cajas de la tarjeta de propósitos: tapan las pintadas en la imagen y      */
+/* replican el Cuadro de texto (497:1186) compuesto sobre #FFF9CC            */
+/* (rellenos .20 y .30 apilados sobre el degradado de la tarjeta)            */
+.goal-input {
+  position: absolute;
+  width: 201px;
+  height: 25px;
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  background: #BCB18A;              /* rgba(154,111,49,.20) + rgba(0,0,0,.20) */
+  box-shadow: var(--sh-inset-cream);
+  cursor: text;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-smart) var(--ease-out), background 200ms ease;
+}
+.goal-input.is-focused { background: #B4A67E; }   /* primer relleno a .30    */
+.goal-input::after {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 4px;
+  width: 1px;
+  height: 17px;
+  border-radius: 1px;
+  background: rgba(90, 60, 10, .55);
+  opacity: 0;
+}
+.goal-input.is-focused::after { opacity: 1; animation: caret-blink 2s infinite; }
+
+/* --- "Guardar" de la tarjeta (Botón 606:3671 · 80×24) y "Editar" (606:3721) -- */
+/* Colores compuestos: el vidrio .20/.32/.40 sobre el #FFF9CC de la tarjeta   */
+.goal-save {
+  position: absolute;
+  width: 80px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: #E8E7C4;
+  color: var(--c-ink);
+  font: 400 12px/14px "Roboto", sans-serif;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-smart) var(--ease-out), background 200ms ease,
+              transform 120ms ease;
+}
+.goal-save:hover  { background: #DBDCC0; }
+.goal-save:active { transform: scale(.96); background: #D2D5BC; }
+
+.goal-edit {
+  position: absolute;
+  padding: 4px 6px;
+  border: 0;
+  background: none;
+  font: 500 12px/14px "Roboto", sans-serif;
+  color: var(--c-title);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-smart) var(--ease-out), transform 120ms ease;
+}
+.goal-edit:hover  { opacity: 1; }
+.goal-edit:active { transform: scale(.94); }
+
+/* --- Visibilidad por estado de la tarjeta (data-state) ---------------------- */
+/* default: solo las 3 caras · propósitos: caras + cajas + Guardar ·          */
+/* "Tus propósitos de hoy": solo Editar (las caras viven dentro de la imagen)  */
+.suni[data-state="triste"] .goal-input,
+.suni[data-state="normal"] .goal-input,
+.suni[data-state="feliz"]  .goal-input,
+.suni[data-state="triste"] .goal-save,
+.suni[data-state="normal"] .goal-save,
+.suni[data-state="feliz"]  .goal-save {
+  opacity: 1;
+  pointer-events: auto;
+}
+.suni[data-state^="done-"] .goal-edit {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* En cada estado de propósitos la cara seleccionada ya viene pintada en la
+   imagen (variante elegida): se oculta el sprite por defecto superpuesto   */
+.suni[data-state="triste"] .face--triste .face__base,
+.suni[data-state="normal"] .face--normal .face__base,
+.suni[data-state="feliz"]  .face--feliz  .face__base { opacity: 0; }
+/* En "Tus propósitos de hoy" no hay caras en esa posición */
+.suni[data-state^="done-"] .face {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Hotspot transparente (celdas de propósitos) */
+.hotspot {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --- Celda de día (Grupo de la cuadrícula 181:4279 · activa 181:4295) ----- */
+/* Defecto 39×141 · seleccionada 54×175.54 radio 10 con blanco .30           */
+.grid {
+  position: absolute;
+  left: 13px;          /* relativo a la tarjeta (abs. 35 en el frame)        */
+  top: 120px;          /* relativo a la tarjeta (abs. 576 en el frame)       */
+  width: 348px;
+  height: 177.54px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cell {
+  flex: 0 0 auto;
+  width: 39px;
+  height: 141px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  transition: width 300ms var(--ease-out), height 300ms var(--ease-out),
+              gap 300ms var(--ease-out), padding 300ms var(--ease-out),
+              background-color 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
+}
+.cell__sun  { width: 20px; height: 20px; transition: width 300ms var(--ease-out), height 300ms var(--ease-out); }
+.cell__moon { width: 11px; height: 15px; transition: width 300ms var(--ease-out), height 300ms var(--ease-out); }
+.cell__time,
+.cell__day {
+  font: 700 15px/17.578125px "Roboto", sans-serif;
+  color: var(--c-cell);
+  white-space: nowrap;
+  transition: font-size 300ms var(--ease-out), line-height 300ms var(--ease-out);
+}
+.cell__day { opacity: .5; transition: opacity 300ms var(--ease-out), font-size 300ms var(--ease-out), line-height 300ms var(--ease-out); }
+
+.cell.is-selected {
+  width: 54px;
+  height: 175.54px;
+  gap: 16px;
+  padding-top: 5px;
+  background: var(--cell-selected);
+  box-shadow: var(--rim-pill), var(--sh-card);
+}
+/* Contenido de la variante activa (181:4342): sol 23 · "8:00"/"11:00" 17 ·
+   día 18 · luna 13, con gap 16 y arranque en y=5 sobre la píldora 54×176  */
+.cell.is-selected .cell__day { opacity: 1; font-size: 18px; line-height: 21.09375px; }
+.cell.is-selected .cell__time { font-size: 17px; line-height: 19.921875px; }
+.cell.is-selected .cell__sun  { width: 23px; height: 23px; }
+.cell.is-selected .cell__moon { width: 13px; height: 17px; }
+
+/* --- Fila de hábitos (Hora día 261:6460 · hover 261:6481) ----------------- */
+/* Altura 53 radio 10 · pad 8/10/22/10 gap 16, centradas en 353px (Frame 2   */
+/* 261:7389, gap 28). El ancho NO es "hug" uniforme: cada instancia trae un   */
+/* ancho fijo de Figma — 337.3 · 348.3 · 353 · 348.3 · 353 · 352.3 · 353 —   */
+/* y Miércoles/Domingo (más el ancho de su texto) desbordan el relleno,      */
+/* comiéndose el padding derecho; por eso se fija por estilo en index.html.  */
+.row {
+  position: relative;
+  width: max-content;
+  height: 53px;
+  margin: 0 auto;
+  padding: 10px 22px 10px 8px;
+  border-radius: 10px;
+  background: var(--row);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  /* Salida del hover (MOUSE_LEAVE → CHANGE_TO 261:6460):
+     SMART_ANIMATE 400ms EASE_OUT — la entrada va en :hover */
+  transition: background-color 400ms var(--ease-out);
+}
+.row + .row { margin-top: 28px; }
+.row:hover,
+.row.is-open,
+.row:focus-visible {
+  background: var(--row-hover);
+  outline: none;
+  /* Entrada al hover (ON_HOVER → CHANGE_TO 261:6481):
+     SMART_ANIMATE 300ms EASE_OUT, tal y como en Figma */
+  transition: background-color 300ms var(--ease-out);
+}
+
+.row__day {
+  font: 600 23px/26.95px "Roboto", sans-serif;
+  color: var(--c-row-label);
+  white-space: nowrap;
+}
+
+.row__icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 33.35px;
+  flex: 0 0 auto;
+}
+.row__icon img { display: block; }
+.row__icon--am img { width: 23px; height: 23px; }
+.row__icon--pm img { width: 13px; height: 18px; }
+.row__icon i {
+  font: 400 8px/10.35px "Roboto", sans-serif;
+  font-style: normal;
+  color: var(--c-cell);
+}
+
+.row__time {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 33.35px;
+  padding: 0 4px;
+  flex: 0 0 auto;
+  font: 700 18px/21px "Roboto", sans-serif;
+  color: var(--c-chip-colon);
+  cursor: pointer;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25.2px;
+  height: 24.63px;
+  border-radius: 5px;
+  background: var(--chip);
+  box-shadow: inset 0 0 0 1px var(--chip-line);
+  font: 700 18px/21px "Roboto", sans-serif;
+  color: var(--c-chip-colon);
+  transition: background-color 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
+}
+.chip:hover {
+  background: var(--chip-hover);
+  box-shadow: inset 0 0 0 1px rgba(255, 251, 226, .75);
+}
+
+/* Selector nativo de hora invisible sobre los chips de "Mis hábitos":
+   mantiene el diseño intacto y abre el reloj del navegador para fijar
+   la hora am (alarma) y la pm (hora de dormir) de cada día.            */
+.time-edit {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  opacity: 0;
+  cursor: pointer;
+  color-scheme: dark;
+}
+.row__time:focus-within { box-shadow: 0 0 0 1.5px rgba(255, 251, 226, .5); border-radius: 6px; }
+
+/* Región de avisos accesibles (enlace con el ESP32) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Nube (453:672 · Nube movimiento 453:843 · Nube delay 453:1082) -------- */
+/* Deriva 340px a la izquierda en 10s EASE_IN_AND_OUT (SMART_ANIMATE)        */
+.cloud {
+  position: absolute;
+  width: 235px;
+  height: 130px;
+  pointer-events: none;
+  animation: cloud-drift 17s linear infinite; will-change: transform;
+}
+@keyframes cloud-drift { to { transform: translateX(-340px); } }
+
+/* --- Bluetooth (337:7607 · activo 337:7608) ------------------------------- */
+/* Píldora 45×38 radio 100 + cara Suni 29×30. El asset bt-face.png lleva el
+   50% de la cara y el ruido ya horneados (#D08A04 = #ea9f08@.50 sobre la
+   píldora con NOISE); is-on la sube a opacidad 1 y tiñe la píldora         */
+.bluetooth {
+  position: absolute;
+  left: 336px;
+  top: 190px;
+  width: 41px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.bluetooth::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: 45px;
+  height: 38px;
+  border-radius: 100px;
+  background: var(--bt-pill);
+  transition: background 400ms var(--ease-out);
+}
+.bluetooth img {
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 29px;
+  height: 30px;
+  opacity: .5;
+  transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out);
+}
+.bluetooth.is-on::before { background: var(--bt-pill-on); }
+.bluetooth.is-on img { opacity: 1; }
+/* Estado "conectando": la píldora respira mientras el navegador negocia */
+@keyframes bt-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .45; }
+}
+.bluetooth.is-connecting::before { animation: bt-pulse 1.2s ease-in-out infinite; }
+.bluetooth:active { transform: scale(.94); }
+
+/* --- Barra de sonido (508:1353 · arrastre → 539:2842) --------------------- */
+/* 336×41 radio 5 · fondo crema .30 · 50 barras 3×35 paso 6 (hasta x=303) ·  */
+/* logo a la derecha sobre fondo liso; el arrastre fija el nivel (MOVE_IN     */
+/* 300ms EASE_OUT)                                                            */
+.bar {
+  position: absolute;
+  left: 42px;
+  top: 384px;
+  width: 336px;
+  height: 41px;
+  border-radius: 5px;
+  background: var(--bar);
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+  overflow: hidden;
+}
+/* 50 barras 3×35 radio 1000 desde x=6 hasta x=300 (paso 6). El estado
+   por defecto del diseño las pinta todas con el relleno base; al
+   arrastrar, las que quedan por encima del nivel se atenúan            */
+.bar__line {
+  position: absolute;
+  top: 3px;
+  width: 3px;
+  height: 35px;
+  border-radius: 1000px;
+  background: #fffbe2;
+  transition: background 300ms var(--ease-out);
+}
+.bar__line.is-off { background: rgba(255, 251, 226, .16); }
+/* Logo crema #FFFCE2 horneado por la NOISE del panel: brightness(.74) deja
+   la media en #A09D7E ≈ la medida en Figma (#A09D7C)                      */
+.bar__logo {
+  position: absolute;
+  left: 307px;
+  top: 10px;
+  width: 25.61px;
+  height: 22px;
+  filter: brightness(.74);
+  pointer-events: none;
+}
+
+/* --- Campos y botones del perfil ------------------------------------------ */
+/* Botón (18:1176) reutilizado como campo: relleno ámbar .30                 */
+.p-input {
+  position: absolute;
+  width: 339px;
+  height: 40px;
+  padding: 0 40px;
+  border: 0;
+  border-radius: 20px;
+  background: var(--field-amber);
+  box-shadow: var(--rim-glass), var(--sh-btn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 400 20px/23.4375px "Roboto", sans-serif;
+  color: var(--c-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  /* Botón (18:1176): hover/pressed = CHANGE_TO heredado 300ms EASE_OUT */
+  transition: background 300ms var(--ease-out), transform 300ms var(--ease-out);
+}
+.p-input:hover { background: var(--field-amber-hv); }
+.p-input:active { transform: scale(.99); }
+
+/* --- Accesibilidad: movimiento reducido ----------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+
+/* Mejoras de experiencia: propósitos guardados visibles sobre los recuadros
+   de la variante de Figma, sin perder el estado del personaje. */
+.goal-input { box-sizing: border-box; padding: 3px 11px; font: 500 12px/18px Roboto,sans-serif; color: #3b3b45; outline-offset: 2px; }
+.goal-input::after { content: none; }
+.goal-input::placeholder { color: #55556a; opacity: .8; }
+.goal-summary { position: absolute; left: 176px; width: 193px; height: 25px; z-index: 100; display: none; align-items: center; padding: 0 9px; box-sizing: border-box; color: #304a65; font: 600 11px/15px Roboto,sans-serif; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; pointer-events: none; }
+.suni[data-state^="done-"] .goal-summary, .suni[data-state^="saved-"] .goal-summary { display: flex; }
+.suni[data-state^="saved-"] .goal-edit { opacity: 1; pointer-events: auto; }
+.grid .cell { cursor: default; }
+.grid .cell:disabled { opacity: 1; color: inherit; }
+.screen--buddi [data-action="buddi:save"] { z-index: 30; position: absolute; }
+.cloud--1, .cloud--2 { animation-delay: -8s; }
+.cloud--3, .cloud--4 { animation-delay: 0s; }
+@media (prefers-reduced-motion: reduce) { .cloud { animation: none; } }

@@ -1,0 +1,164 @@
+/* =========================================================================
+   Suni · tokens.css
+   Variables extraídas del archivo de Figma "Suni" (versión 2026-10-21)
+   (paleta, rellenos, degradados, efectos y transiciones de los prototipos)
+   ========================================================================= */
+
+:root {
+  /* ---- Fondos de frame -------------------------------------------------- */
+  /* Splash / Login / Registro / Home: "Fondo gradiente" — #FAE8C4 21.15% ·
+     #FACB6D 60.36% · #E2BB6E 100%                                         */
+  --grad-sun: linear-gradient(180deg, #FAE8C4 21.15%, #FACB6D 60.36%, #E2BB6E 100%);
+  /* Mis hábitos / Configura tu Buddi: relleno plano #F9DEA6                */
+  --c-bg-warm: #F9DEA6;
+  /* Mi Cuenta y Perfil: #F9DEA6 55.37% → #87AFBC 100%                     */
+  --grad-profile: linear-gradient(180deg, #F9DEA6 55.37%, #87AFBC 100%);
+
+  /* ---- Degradados de panel ----------------------------------------------
+     Los cuatro paneles llevan el efecto NOISE de Figma (grano monocromo
+     negro, alfa .25, tamaño .2, densidad 1) que oscurece el color medio
+     ~10 %: los stops vienen ya compensados ×0.9 contra los renders.     */
+  /* Mis hábitos · Rectangle 57 (261:7457): #7F8744 12.68% → #96A144 100%.
+     Eje diagonal: handles (0.9999,0.0926)→(0.0274,0.4465) sobre 420×786
+     ⇒ 235.8deg con los stops proyectados al largo de la caja CSS        */
+  --grad-habitos: linear-gradient(235.8deg, #72793D 13.1%, #87913D 67.8%);
+  /* Buddi · Frame 22 (569:3614): #636125 42.31% → #49492C 100%             */
+  /* Los tres paneles llevan NOISE negro a.25 (density 1 · size .2): el     */
+  /* render oscurece la media un ≈12,5% ⇒ factor .875 (verificado:          */
+  /* #808244×.875 = #70723C = color medido en el borde del panel 2)         */
+  --grad-buddi-1: linear-gradient(180deg, #575620 42.31%, #414027 100%);
+  /* Buddi · Frame 20 (569:3612): #808243 15.44% → #6F6B31 60.53%           */
+  --grad-buddi-2: linear-gradient(180deg, #70723C 15.44%, #625E2B 60.53%);
+  /* Buddi · Frame 21 (569:3613): #989F63 0% → #727A34 100%                 */
+  --grad-buddi-3: linear-gradient(180deg, #868C58 0%, #646C2D 100%);
+  /* Perfil · Rectangle 61 (485:941): línea divisoria horizontal           */
+  --grad-divider: linear-gradient(90deg, #D5B36C 25%, #FFFCF7 50%, #D5B36C 73.56%);
+
+  /* ---- Paleta ----------------------------------------------------------- */
+  --c-title:        #9A6F31;  /* títulos, saludo, "Tus alarmas", labels login */
+  --c-olive:        #636125;  /* texto de los Botón genéricos                 */
+  --c-rust:         #D55820;  /* acento cálido (caras Suni)                   */
+  --c-cream:        #FFFBE2;  /* texto sobre paneles oscuros                  */
+  /* Tarjeta "Tus alarmas": #F9DEA6 + NOISE (.25) + interiores claros
+     (INNER_SHADOW r4 a1 y r0 a.10) ⇒ color medio medido #FBE2B0          */
+  --c-card:         #FBE2B0;  /* tarjeta "Tus alarmas"                        */
+  --sh-card-edge:   inset 0 0 4px rgba(255, 252, 226, .55);  /* interior r4 */
+  --c-green:        #7F8744;  /* carita "feliz"                               */
+  --c-ink:          #323100;  /* texto de botones sobre vidrio                */
+  --c-cell:         #B66A31;  /* textos e iconos de la cuadrícula             */
+  --c-row-label:    #845613;  /* nombre del día en cada fila                  */
+  --c-chip-colon:   #9A6F31;  /* ":" de las cajas de hora                    */
+  --c-sound:        #653C00;  /* sonido · #744500×.875 (NOISE del panel 3)    */
+  --c-p-label:      #635625;  /* labels del perfil                            */
+  --c-p-name:       #595827;  /* "Isabel"                                     */
+  --c-p-save:       #56889D;  /* "Guardar" del perfil                         */
+  --c-bt-face:      #E8B349;  /* cara Bluetooth activa                        */
+
+  /* ---- Materiales ------------------------------------------------------- */
+  --glass:          rgba(142, 159, 163, .20);  /* Botón (18:1176)            */
+  --glass-hover:    rgba(142, 159, 163, .32);  /* variante hover 47:3059    */
+  --glass-press:    rgba(142, 159, 163, .40);  /* variante pressed 47:3063  */
+  --field:          linear-gradient(rgba(154, 111, 49, .20), rgba(154, 111, 49, .20)),
+                    linear-gradient(rgba(0, 0, 0, .20), rgba(0, 0, 0, .20));
+  --field-focus:    linear-gradient(rgba(154, 111, 49, .30), rgba(154, 111, 49, .30)),
+                    linear-gradient(rgba(0, 0, 0, .20), rgba(0, 0, 0, .20));
+  --field-amber:    rgba(143, 88, 0, .30);      /* inputs del perfil         */
+  --field-amber-hv: rgba(143, 88, 0, .42);
+  --row:            rgba(255, 251, 226, .20);   /* Hora día (261:6460)       */
+  --row-hover:      rgba(255, 255, 255, .34);
+  --chip:           rgba(211, 192, 104, .20);
+  --chip-hover:     rgba(211, 192, 104, .38);
+  --chip-line:      rgba(255, 251, 226, .45);
+  --cell-selected:  rgba(255, 255, 255, .42);   /* celda día activa (medido) */
+  /* Barra (291:7522): Rectangle 20 = #fffce2@.30; con la NOISE del panel el */
+  /* render mide #87855C/#A19F7D ⇒ alfa efectiva .23 sobre el degradado      */
+  --bar:            rgba(255, 252, 226, .23);   /* barra de sonido           */
+  --bar-on:         rgba(255, 252, 226, .48);   /* nivel al arrastrar        */
+  /* Píldora BT (337:7593 #d9d9d9@.20 · .50 activa) horneadas sobre panel 1  */
+  --bt-pill:        #64643D;
+  --bt-pill-on:     #86856D;
+  --goal-card:      #FFF9CC;                     /* tarjeta de propósitos     */
+
+  /* ---- Efectos ---------------------------------------------------------- */
+  --sh-btn:         0 0 3px rgba(0, 0, 0, .10);           /* effect2          */
+  /* Filo especular del efecto GLASS de Figma (~1px claro medido en los
+     renders: botones 231,233,223 · flecha 232,236,237 · nav 230,225,193)  */
+  --rim-glass:      inset 0 0 0 1px rgba(238, 250, 255, .42);
+  /* Filo de la píldora del día activo (medido 254,249,220 sobre #FCEED0)  */
+  --rim-pill:       inset 0 0 0 1px rgba(255, 253, 224, .75);
+  --sh-card:        0 0 4px rgba(0, 0, 0, .15);           /* effect5          */
+  --sh-inset-cream: inset 0 1px 5px rgba(255, 252, 226, .20);  /* effect1    */
+
+  /* ---- Movimiento (transiciones de los prototipos) ---------------------- */
+  --t-dissolve: 300ms;
+  --t-slide:    400ms;
+  --t-smart:    300ms;
+  --t-cloud:    10000ms;
+  --ease-in:    cubic-bezier(.42, 0, 1, 1);   /* Figma "Ease in"             */
+  --ease-out:   cubic-bezier(0, 0, .58, 1);   /* Figma "Ease out"            */
+  --ease-inout: cubic-bezier(.42, 0, .58, 1); /* Figma "Ease in and out"     */
+
+  /* ---- Métrica del dispositivo ------------------------------------------ */
+  --device-w: 420px;
+  --device-h: 912px;
+}
+
+/* ========================================================================= */
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+body {
+  background: #232326;
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--c-ink);
+}
+
+.stage {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* Marco del dispositivo: 420 × 912 (tamaño exacto del frame de Figma) */
+.device {
+  position: relative;
+  width: var(--device-w);
+  height: var(--device-h);
+  flex: 0 0 auto;
+  overflow: hidden;
+  background: var(--grad-sun);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .06);
+}
+
+/* Pantallas ------------------------------------------------------------ */
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  visibility: hidden;
+  background: var(--grad-sun);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.screen--plain { background: var(--c-bg-warm); }   /* hábitos · buddi */
+.screen--perfil { background: var(--grad-profile); }
+
+.screen.is-current { visibility: visible; z-index: 1; }
+.screen.is-above   { visibility: visible; z-index: 2; }
+
+/* Utilidades ------------------------------------------------------------ */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,300 @@
+/* =========================================================================
+   Suni · screens.css
+   Posicionado absoluto de cada pantalla con las coordenadas exactas de los
+   frames de Figma (420 × 912 · registro 420 × 1258). Todos los valores
+   provienen de absoluteBoundingBox del archivo "Suni" (2026-10-21).
+   ========================================================================= */
+
+/* ---------- 1 · Splash (331:7579) ---------------------------------------- */
+.splash__suni {
+  position: absolute;
+  left: 46px;
+  top: 371px;
+  width: 335px;
+  height: 715px;   /* recortada por el borde inferior del frame */
+}
+
+.splash__or {
+  position: absolute;
+  left: 204px;
+  top: 196px;
+  margin: 0;
+  width: 14px;
+  height: 23px;
+  font: 400 20px/23.4375px "Roboto", sans-serif;
+  color: var(--c-title);
+}
+
+.splash__slogan {
+  position: absolute;
+  left: 38px;
+  top: 316px;
+  margin: 0;
+  height: 23px;
+  font: 600 20px/23.4375px "Roboto", sans-serif;
+  color: var(--c-title);
+  white-space: nowrap;
+}
+
+/* ---------- 2 · Login (377:429) ------------------------------------------ */
+/* La cara (Cara Suni Sonrisa 377:434) debe posicionarse; sin `position` las   */
+/* reglas left/top eran inertes y la imagen caía en flujo normal (0,−48).      */
+.screen--login .brand  { position: absolute; left: 39px; top: 105px; width: 342px; height: 346px; }
+
+/* ---------- 3 · Crear cuenta (95:3388 · frame 420×1258) ------------------ */
+/* El formulario "Frame 19" mide 668px y el botón termina en y=1217: el      */
+/* contenido desborda el viewport de 912 y se reproduce con scroll interno.  */
+.screen--registro .scroll {
+  position: absolute;
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.screen--registro .scroll::-webkit-scrollbar { width: 0; height: 0; }
+
+.screen--registro .sheet {
+  position: relative;
+  width: 420px;
+  height: 1258px;
+  /* El gradiente del frame (95:3388) abarca los 1258px completos, no los 912
+     del viewport: se pinta en la hoja para que los stops caigan igual que en
+     Figma (medido: #FAE6BE@y300 · #FADEA4@y450 · #F3C76D@y900)             */
+  background: var(--grad-sun);
+}
+
+.screen--registro .brand { position: absolute; left: 39px; top: 108px; width: 342px; height: 346px; }
+
+.registro__title {
+  position: absolute;
+  left: 138px;
+  top: 487px;
+  margin: 0;
+  height: 29px;
+  font: 500 25px/29.296875px "Roboto", sans-serif;
+  color: var(--c-title);
+  white-space: nowrap;
+}
+
+/* ---------- 4 · Home (95:3394) ------------------------------------------- */
+/* 95:3430: base Roboto Bold 25/29.297 pero los rangos pisan el peso —
+   "¡Buenos días, " y "!" → Regular 400 · "Isabel" → ExtraBold 800
+   (styleOverrideTable 6/5/6 de Figma); todo en #9A6F31                   */
+.home__greeting {
+  position: absolute;
+  left: 29px;
+  top: 70px;
+  margin: 0;
+  height: 29px;
+  font: 400 25px/29.296875px "Roboto", sans-serif;
+  color: var(--c-title);
+  white-space: nowrap;
+}
+.home__greeting b { font-weight: 800; }
+
+.card {
+  position: absolute;
+  left: 22px;
+  top: 456px;
+  width: 376px;
+  height: 456px;
+  margin: 0;
+  border-radius: 20px 20px 0 0;
+  background: var(--c-card);
+  /* Rectángulo interior r4 a1 + r0 a.10 + DROP_SHADOW r4 a.25 + NOISE a.25
+     (el borde claro interior es el INNER_SHADOW de alfa 1, medido en el
+     render: 2-3px más luminosos que el centro de la tarjeta)             */
+  box-shadow: inset 0 0 4px rgba(255, 252, 226, .55),
+              inset 0 -1px 0 rgba(0, 0, 0, .10),
+              0 0 4px rgba(0, 0, 0, .25);
+}
+.card__title {
+  position: absolute;
+  left: 20px;
+  top: 31px;
+  margin: 0;
+  height: 23px;
+  font: 500 20px/23.4375px "Roboto", sans-serif;
+  color: var(--c-title);
+}
+.card__date {
+  position: absolute;
+  left: 20px;
+  top: 66px;
+  margin: 0;
+  height: 29px;
+  font: 500 25px/29.296875px "Roboto", sans-serif;
+  color: var(--c-title);
+  white-space: nowrap;
+}
+
+/* ---------- 5 · Mis hábitos (95:3431) ------------------------------------ */
+/* Nubes: 4 instancias (2 "Nube delay" + 2 "Nube movimiento") de 235×130     */
+/* AFTER_TIMEOUT: \"Nube delay\" espera 5s · \"Nube movimiento\" 0.001s;
+   ambas derivan 340px en 10000ms EASE_IN_AND_OUT                        */
+.cloud--1 { left: 713px; top:  96px; animation-delay: 5s; }    /* delay     */
+.cloud--2 { left: 433px; top: 271px; animation-delay: 5s; }    /* delay     */
+.cloud--3 { left: 703px; top:  96px; animation-delay: .001s; } /* movimiento*/
+.cloud--4 { left: 423px; top: 271px; animation-delay: .001s; } /* movimiento*/
+
+.habitos__pillow {
+  position: absolute;
+  left: 42px;
+  top: 104px;
+  width: 326px;
+  height: 326px;
+}
+.habitos__panel {
+  position: absolute;
+  left: 0;
+  top: 412px;
+  width: 420px;
+  height: 786px;
+  background: var(--grad-habitos);
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, .20);   /* DROP_SHADOW (0,-5) r10    */
+}
+
+.habitos__subtitle {
+  position: absolute;
+  left: 63px;
+  top: 435px;
+  margin: 0;
+  height: 29px;
+  font: 500 25px/29.296875px "Roboto", sans-serif;
+  color: var(--c-cream);
+  white-space: nowrap;
+}
+
+.habits__list {
+  position: absolute;
+  left: 33px;
+  top: 488px;      /* primera fila (Frame 2 arranca en 469) */
+  width: 353px;
+}
+.habits__list .row:first-child { margin-top: 0; }
+
+/* ---------- 6 · Configura tu Buddi (95:3435) ----------------------------- */
+/* Esquinas superiores radio 18 (medido en el render: borde izq. en x=15/12/10
+   a 1/2/3px del borde superior). Frame 22 NO tiene drop-shadow: su único
+   efecto es NOISE y los tonos ya los hornean los tokens.                  */
+.buddi__panel { position: absolute; left: 0; border-radius: 18px 18px 0 0; }
+.buddi__panel--1 { top: 146px; width: 420px; height: 175px; background: var(--grad-buddi-1); }
+.buddi__panel--2 { top: 296px; width: 420px; height: 210px; background: var(--grad-buddi-2); }
+.buddi__panel--3 { top: 462px; width: 420px; height: 450px; background: var(--grad-buddi-3); }
+
+/* Títulos de panel: el fill real es #FFFCE2 pero van DENTRO del grupo con
+   NOISE ⇒ el render los oscurece a #DFDDC6 (medido = #FFFCE2×.875)        */
+.buddi__section {
+  position: absolute;
+  margin: 0;
+  height: 29px;
+  font: 700 25px/29.296875px "Roboto", sans-serif;
+  color: #DFDDC6;
+  white-space: nowrap;
+}
+
+/* ---------- Títulos de pantalla (400 25/29.3) ---------------------------- */
+.screen__title {
+  position: absolute;
+  margin: 0;
+  height: 29px;
+  font: 400 25px/29.296875px "Roboto", sans-serif;
+  color: var(--c-title);
+  white-space: nowrap;
+}
+
+/* ---------- 7 · Mi Cuenta y Perfil (406:7770) ---------------------------- */
+/* Decoración (orden de apilado del frame: de atrás hacia adelante)          */
+.perfil__decor { position: absolute; }
+.pd-v1 { left:  45px;    top: 173px; width: 122px; height: 58px;  }
+.pd-v4 { left: 134px;    top: 778px; width: 152px; height: 60px;  }
+.pd-v3 { left: 244px;    top: 201px; width: 154px; height: 94px;  }
+.pd-v2 { left:  67px;    top: 205px; width: 284px; height: 90px;  }
+.pd-e4 {
+  left: 179px; top: 208px; width: 55px; height: 55px;
+  border-radius: 50%;
+  background: #EAE4C0;
+}
+.pd-div {
+  left: 28px; top: 304px; width: 370px; height: 5px;
+  border-radius: 100px;
+  background: var(--grad-divider);
+}
+.pd-png02 { left: 304px; top: 769px; width: 72.53px; height: 72.53px; }
+.pd-v5 { left: -55.08px; top: 791px; width: 152px; height: 138px; }
+.pd-v6 { left: 250px;    top: 790px; width: 257px; height: 151px; }
+.pd-v7 { left: 0;        top: 879px; width: 420px; height: 44px;  }
+
+.perfil__face {
+  position: absolute;
+  left: 150px;
+  top: 175px;
+  width: 119px;
+  height: 120px;
+}
+
+.perfil__name {
+  position: absolute;
+  left: 175px;
+  top: 320px;
+  margin: 0;
+  height: 29px;
+  font: 700 25px/29.296875px "Roboto", sans-serif;
+  color: var(--c-p-name);
+  white-space: nowrap;
+}
+
+.perfil__edit {
+  position: absolute;
+  left: 187px;
+  top: 347px;
+  padding: 0;
+  border: 0;
+  background: none;
+  height: 18px;
+  font: 500 15px/17.578125px "Roboto", sans-serif;
+  color: var(--c-title);
+  cursor: pointer;
+  transition: opacity 150ms ease, transform 120ms ease;
+}
+.perfil__edit:hover  { opacity: .75; }
+.perfil__edit:active { transform: scale(.94); }
+
+.perfil__label {
+  position: absolute;
+  height: 23px;
+  font: 700 20px/23.4375px "Roboto", sans-serif;
+  color: var(--c-p-label);
+  white-space: nowrap;
+}
+
+.perfil__save {
+  position: absolute;
+  left: 133px;      /* hotspot sobre la forma Vector 4 (134,778) 152×60 */
+  top: 778px;
+  width: 174px;
+  height: 60px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.perfil__save span {
+  position: absolute;
+  left: 42px;       /* texto en (175,808) → relativo al hotspot */
+  top: 30px;
+  height: 23px;
+  font: 600 20px/23.4375px "Roboto", sans-serif;
+  color: var(--c-p-save);
+  white-space: nowrap;
+  transition: transform 150ms var(--ease-out);
+}
+.perfil__save:hover span  { transform: translateY(-1px); }
+.perfil__save:active span { transform: translateY(1px); }
+
+/* ---------- Accesibilidad: movimiento reducido --------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
